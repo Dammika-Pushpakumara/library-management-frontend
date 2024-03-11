@@ -1,11 +1,13 @@
 import { Component, OnInit } from '@angular/core';
 import { HttpClient, HttpClientModule } from '@angular/common/http';
+import { FormsModule } from '@angular/forms';
+import { CommonModule } from '@angular/common';
 
 
 @Component({
   selector: 'app-view-all-books',
   standalone: true,
-  imports: [HttpClientModule],
+  imports: [HttpClientModule, FormsModule, CommonModule],
   templateUrl: './view-all-books.component.html',
   styleUrl: './view-all-books.component.css'
 })
