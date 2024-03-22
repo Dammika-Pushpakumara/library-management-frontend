@@ -15,7 +15,8 @@ export class ViewAllBooksComponent implements OnInit{
 
   private http;
 
-  public bookList:any ={};
+  public bookList:any;
+  public selectedBook:any;
 
   constructor(private httpClient:HttpClient){
     this.http=httpClient;
@@ -28,5 +29,18 @@ export class ViewAllBooksComponent implements OnInit{
     this.bookList=data;
     console.log(this.bookList);
     })
+  }
+  deleteBook(){
+    let api = "http://localhost:8080/book/"+this.selectedBook.id;
+    this.http.delete(api,{responseType:'text'}).subscribe((Response:string) =>{
+      console.log(Response);
+      this.loadBooks();
+      this.selectedBook = null;
+    });
+  }
+
+  setSelectedBook(book:any){
+    this.selectedBook = book;
+    console.log("setSelectedBook"+book.id);
   }
 }
