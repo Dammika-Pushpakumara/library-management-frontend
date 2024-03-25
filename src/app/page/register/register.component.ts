@@ -2,6 +2,7 @@ import { CommonModule } from '@angular/common';
 import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { FormsModule } from '@angular/forms';
+import { Router } from '@angular/router';
 import Swal from 'sweetalert2';
 
 
@@ -31,7 +32,7 @@ export class RegisterComponent implements OnInit {
   }
   public selectedCountryCode:any;
 
-  constructor(private httpClient:HttpClient){
+  constructor(private httpClient:HttpClient, public router:Router){
     this.http=httpClient;
   }
 
@@ -70,6 +71,7 @@ export class RegisterComponent implements OnInit {
           text: `${this.userObj.userName} has been registered !`,
           icon: "success"
         });
+        this.router.navigate(['/login'])
       })
     }else{
       Swal.fire({
