@@ -1,0 +1,137 @@
+<app-nav></app-nav>
+<div class="container">
+    <table class="table table-hover table-bordered" *ngIf="userList">
+        <thead>
+            <tr>
+                <th scope="col">Id</th>
+                <th scope="col">First Name</th>
+                <th scope="col">Last Name</th>
+                <th scope="col">User Name</th>
+                <th scope="col">Address</th>
+                <th scope="col">Address 02</th>
+                
+                <th scope="col">Email</th>
+                <th scope="col">Country</th>
+                <th scope="col">Phone Number</th>
+          </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let user of userList">
+                <td>#USER{{user.id}}</td>
+                <td>{{user.firstName}}</td>
+                <td>{{user.lastName}}</td>
+                <td>{{user.userName}}</td>
+                <td>{{user.address}}</td>
+                <td>{{user.address2}}</td>
+                <td>{{user.email}}</td>
+                <td>{{user.country}}</td>
+                <td>{{user.phoneNumber}}</td>
+                <td><button class="btn btn-danger" (click)="setSelectedUser(user)" data-bs-toggle="modal" data-bs-target="#deleteModal"><i class="bi bi-trash"></i></button></td>
+                <td><button class="btn btn-secondary" (click)="setSelectedUser(user)" data-bs-toggle="modal" data-bs-target="#updateModal"><i class="bi bi-pencil-square"></i></button></td>
+            </tr>
+        </tbody>
+    
+    </table>
+</div>
+
+
+
+<!-- Modal Delete-->
+<div class="modal fade" id="deleteModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+  aria-labelledby="deleteModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="deleteModalLabel">Delete Confirmation</h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        Do you want to delete ?
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-danger" data-bs-dismiss="modal" (click)=" deleteUser()">Confirm</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<!-- Modal Update-->
+
+<div class="modal fade" id="updateModal" tabindex="-1" aria-labelledby="updateModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="updateModalLabel">Update User</h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <form>
+          <div class="mb-3">
+            <label for="recipient-name" class="col-form-label">ID</label>
+            <input type="text" [(ngModel)]="selectedUser.id" [ngModelOptions]="{standalone:true}" disabled class="form-control" id="recipient-name">
+          </div>
+          <div class="mb-3">
+            <label for="recipient-name" class="col-form-label">First Name</label>
+            <input type="text" [(ngModel)]="selectedUser.firstName" [ngModelOptions]="{standalone:true}" class="form-control" id="recipient-name">
+          </div>
+          <div class="mb-3">
+            <label for="recipient-name" class="col-form-label">Last Name</label>
+            <input type="text" [(ngModel)]="selectedUser.lastName" [ngModelOptions]="{standalone:true}" class="form-control" id="recipient-name">
+          </div>
+          <div class="mb-3">
+            <label for="recipient-name" class="col-form-label">User Name</label>
+            <input type="text" [(ngModel)]="selectedUser.userName" [ngModelOptions]="{standalone:true}" class="form-control" id="recipient-name">
+          </div>
+          <div class="mb-3">
+            <label for="recipient-name" class="col-form-label">Address</label>
+            <input type="text"[(ngModel)]="selectedUser.address" [ngModelOptions]="{standalone:true}" class="form-control" id="recipient-name">
+          </div>
+          <div class="mb-3">
+            <label for="recipient-name" class="col-form-label">Address 02</label>
+            <input type="text"[(ngModel)]="selectedUser.address2" [ngModelOptions]="{standalone:true}" class="form-control" id="recipient-name">
+          </div>
+          <div class="mb-3">
+            <label for="recipient-name" class="col-form-label">Email</label>
+            <input type="text"[(ngModel)]="selectedUser.email" [ngModelOptions]="{standalone:true}" class="form-control" id="recipient-name">
+          </div>
+        
+          <div class="mb-3">
+            <label for="recipient-name" class="col-form-label">Country</label>
+            <input type="text"[(ngModel)]="selectedUser.country" [ngModelOptions]="{standalone:true}" class="form-control" id="recipient-name">
+          </div>
+          <div class="mb-3">
+            <label for="recipient-name" class="col-form-label">Phone Number</label>
+            <input type="number" [(ngModel)]="selectedUser.phoneNumber" [ngModelOptions]="{standalone:true}" class="form-control" id="recipient-name">
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary" data-bs-dismiss="modal" data-bs-toggle="modal" data-bs-target="#updateConfirmationModal">Update</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<!-- Modal Update Confirmation-->
+
+<div class="modal fade" id="updateConfirmationModal" tabindex="-1" aria-labelledby="updateConfirmationModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="updateConfirmationModalLabel">Update User</h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        Do you want to update user ?
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary" data-bs-dismiss="modal" (click)="saveUser()">Confirm</button>
+      </div>
+    </div>
+  </div>
+</div>
