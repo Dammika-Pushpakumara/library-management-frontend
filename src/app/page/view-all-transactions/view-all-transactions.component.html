@@ -1,0 +1,21 @@
+<app-nav></app-nav>
+<div class="container">
+  <table class="table table-bordered">
+    <thead>
+      <th>Transaction ID</th>
+      <th>Borrower ID</th>
+      <th>Books</th>
+      <th>Date</th>
+      <th>Fine</th>
+    </thead>
+    <tbody>
+      <tr *ngFor="let transaction of allTransactions">
+        <td>{{transaction.id}}</td>
+        <td>{{transaction.borrowId}}</td>
+        <td>{{transaction.books}}</td>
+        <td>{{transaction.date}}</td>
+        <td>{{transaction.fine}}</td>
+      </tr>
+    </tbody>
+  </table>
+</div>

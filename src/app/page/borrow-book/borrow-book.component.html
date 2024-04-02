@@ -1,0 +1,60 @@
+<app-nav></app-nav>
+<div class="container">
+  <div class="input-group mb-3">
+    <input type="text" class="form-control" placeholder="Recipient's username" aria-label="Recipient's username"
+      aria-describedby="button-addon2" [(ngModel)]="userName" [ngModelOptions]="{standalone: true}" (keydown.enter)="searchUser()">
+    <button class="btn btn-success" type="button" id="button-addon2"  (click)="searchUser()">Search</button>
+  </div>
+
+  <table class="table table-bordered"  *ngIf="user">
+    <thead>
+      <tr>
+        <th>User Name</th>
+        <th>email</th>
+        <th>Phone number</th>
+        <th>Country</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>{{user.userName}}</td>
+        <td>{{user.email}}</td>
+        <td>{{user.phoneNumber}}</td>
+        <td>{{user.country}}</td>
+      </tr>
+
+    </tbody>
+  </table>
+
+  <div *ngIf="user">
+    <div class="input-group mb-3">
+      <input type="text" class="form-control" placeholder="Book id" aria-label="Book id"
+        aria-describedby="button-addon2" [(ngModel)]="bookId" [ngModelOptions]="{standalone: true}" (keydown.enter)="searchBook()">
+      <button class="btn btn-success" type="button" id="button-addon2" (click)="searchBook()">Search</button>
+    </div>
+  </div>
+
+  <table class="table table-bordered" *ngIf="searchBookRes">
+    <thead>
+      <tr>
+        <th>ID</th>
+        <th>ISBN</th>
+        <th>title</th>
+        <th>author</th>
+        <th>category</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let book of cartList">
+        <td>{{book.id}}</td>
+        <td>{{book.isbn}}</td>
+        <td>{{book.title}}</td>
+        <td>{{book.author}}</td>
+        <td>{{book.category}}</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <input type="button" class="btn btn-primary" value="Borrow Book"  *ngIf="searchBookRes" (click)="borrowBooks()"(keydown.enter)="borrowBooks()">
+
+</div>
